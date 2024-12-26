@@ -1,0 +1,23 @@
+<div style="width: 300px; height: 100vh; overflow-y: auto; border-right: 1px solid #ddd; padding: 20px; background: #f5f5f5;">
+  <% if emails.any? %>
+    <%= button_to "Delete All", draft_box.emails_path, method: :delete,
+        style: "background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer; width: 100%; margin-bottom: 15px;" %>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <% emails.each do |email| %>
+        <li style="padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: flex-start;">
+          <%= link_to draft_box.email_path(email), style: "text-decoration: none; color: inherit; flex: 1;" do %>
+            <div style="font-weight: bold; margin-bottom: 5px;"><%= email.subject %></div>
+            <div style="color: #666; font-size: 0.9em;">
+              To: <%= email.to.join(", ") %><br>
+              <%= email.created_at.strftime("%B %d, %Y %H:%M") %>
+            </div>
+          <% end %>
+          <%= button_to "Delete", draft_box.email_path(email), method: :delete, 
+              style: "background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p style="color: #666; text-align: center;">No emails found</p>
+  <% end %>
+</div>

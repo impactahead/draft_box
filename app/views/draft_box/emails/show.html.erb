@@ -1,0 +1,49 @@
+<div style="display: flex; height: 100vh;">
+  <%= render "draft_box/emails/sidebar", emails: @emails %>
+  
+  <div style="flex: 1; padding: 20px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="margin-bottom: 20px;"><%= @email.subject %></h2>
+      
+      <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <div style="margin-bottom: 10px;">
+          <strong>From:</strong> <%= @email.from %>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <strong>To:</strong> <%= @email.to.join(", ") %>
+        </div>
+        <% if Array.wrap(@email.cc).any? %>
+          <div style="margin-bottom: 10px;">
+            <strong>CC:</strong> <%= Array.wrap(@email.cc).join(", ") %>
+          </div>
+        <% end %>
+        <% if Array.wrap(@email.bcc).any? %>
+          <div style="margin-bottom: 10px;">
+            <strong>BCC:</strong> <%= Array.wrap(@email.bcc).join(", ") %>
+          </div>
+        <% end %>
+        <div>
+          <strong>Date:</strong> <%= @email.created_at.strftime("%B %d, %Y %H:%M") %>
+        </div>
+      </div>
+
+      <% if @email.attachments.any? %>
+        <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+          <strong>Attachments:</strong>
+          <ul style="list-style: none; padding: 0; margin: 10px 0 0 0;">
+            <% @email.attachments.each do |attachment| %>
+              <li style="margin-bottom: 5px;">
+                <%= link_to attachment.filename, draft_box.attachment_path(@email, attachment), 
+                    style: "color: #0066cc; text-decoration: none;" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+        <%= @email.body.html_safe %>
+      </div>
+    </div>
+  </div>
+</div>
