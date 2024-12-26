@@ -16,8 +16,6 @@ module Generators
         template "attachments_migration.rb", "db/migrate/#{timestamp}_create_draft_box_attachments.rb"
       end
 
-      private
-
       def migration_version
         "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
       end
@@ -29,6 +27,10 @@ module Generators
       def primary_key_string
         key_string = options[:primary_key_type]
         ", id: :#{key_string}" if key_string
+      end
+
+      def sqlite?
+        ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: "primary").adapter_class.to_s.match?(/sqlite/i)
       end
     end
   end

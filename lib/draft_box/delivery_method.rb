@@ -9,27 +9,14 @@ module DraftBox
     def deliver!(mail)
       validate_mail!(mail)
 
-      # subject: mail.subject
-      # body: mail.body.to_s
-      # from: mail.from
-      # to: mail.to
-      # cc: mail.cc
-      # bcc: mail.bcc
-      # attachments: mail.attachments
-
-      # Attachment:
-      # filename: attachment.filename
-      # content_type: attachment.content_type
-      # content: attachment.body.to_s
-
       ActiveRecord::Base.transaction do
         email = DraftBox::Email.create!(
           subject: mail.subject,
           body: mail.parts.empty? ? mail.body.to_s : mail.parts.find { |p| p.content_type.start_with?('text/html', 'text/plain') }&.body.to_s,
           from: mail.from.first,
-          to: mail.to,
-          cc: mail.cc,
-          bcc: mail.bcc
+          recipients: mail.to,
+          carbon_copies: mail.cc || [],
+          blind_copies: mail.bcc || []
         )
 
         mail.attachments.each do |attachment|

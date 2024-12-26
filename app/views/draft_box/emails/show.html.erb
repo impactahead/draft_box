@@ -10,16 +10,16 @@
           <strong>From:</strong> <%= @email.from %>
         </div>
         <div style="margin-bottom: 10px;">
-          <strong>To:</strong> <%= @email.to.join(", ") %>
+          <strong>To:</strong> <%= @email.recipients.join(", ") %>
         </div>
-        <% if Array.wrap(@email.cc).any? %>
+        <% if Array.wrap(@email.carbon_copies).any? %>
           <div style="margin-bottom: 10px;">
-            <strong>CC:</strong> <%= Array.wrap(@email.cc).join(", ") %>
+            <strong>CC:</strong> <%= Array.wrap(@email.carbon_copies).join(", ") %>
           </div>
         <% end %>
-        <% if Array.wrap(@email.bcc).any? %>
+        <% if Array.wrap(@email.blind_copies).any? %>
           <div style="margin-bottom: 10px;">
-            <strong>BCC:</strong> <%= Array.wrap(@email.bcc).join(", ") %>
+            <strong>BCC:</strong> <%= Array.wrap(@email.blind_copies).join(", ") %>
           </div>
         <% end %>
         <div>

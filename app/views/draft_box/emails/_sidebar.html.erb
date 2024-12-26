@@ -8,7 +8,7 @@
           <%= link_to draft_box.email_path(email), style: "text-decoration: none; color: inherit; flex: 1;" do %>
             <div style="font-weight: bold; margin-bottom: 5px;"><%= email.subject %></div>
             <div style="color: #666; font-size: 0.9em;">
-              To: <%= email.to.join(", ") %><br>
+              To: <%= email.recipients.join(", ") %><br>
               <%= email.created_at.strftime("%B %d, %Y %H:%M") %>
             </div>
           <% end %>
