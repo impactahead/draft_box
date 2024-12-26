@@ -1,6 +1,6 @@
 # Draft Box
 
-A web interface for browsing Ruby on Rails sent emails with support for distributed environments. The library is using database for storing e-mail messages and attachments to present them on the dedicated dashboard and work correctly with applications based on multiple workers. Supported database engines: PostgreSQL, SQLite.
+A web interface for browsing Ruby on Rails sent emails with support for distributed environments. The library is using database for storing e-mail messages and attachments to present them on the dedicated dashboard and work correctly with applications based on multiple workers. Supported database engines: PostgreSQL, MySQL, and SQLite.
 
 ## Getting started
 

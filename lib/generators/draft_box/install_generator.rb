@@ -30,7 +30,15 @@ module Generators
       end
 
       def sqlite?
-        ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: "primary").adapter_class.to_s.match?(/sqlite/i)
+        db_adapter.match?(/sqlite/i)
+      end
+
+      def mysql?
+        db_adapter.match?(/mysql/i)
+      end
+
+      def db_adapter
+        ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: "primary").adapter_class.to_s
       end
     end
   end
