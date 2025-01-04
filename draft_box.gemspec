@@ -10,6 +10,6 @@ Gem::Specification.new do |gem|
   gem.description = "A web interface for browsing Ruby on Rails sent emails with support for distributed environments"
   gem.authors     = ["Paweł Dąbrowski"]
   gem.email       = 'contact@paweldabrowski.com'
-  gem.files       = Dir['{app,config,lib}/**/*.rb']
+  gem.files       = Dir['{app,config,lib}/**/*.{rb,erb}']
   gem.homepage    = 'https://github.com/paweldabrowski/draft_box'
 end
